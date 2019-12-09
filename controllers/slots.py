@@ -30,18 +30,17 @@ class MainController:
             self.items.append(item)
         print("itemler hazır")
 
-        print(self.items[7])
         self.search()
 
     def temizle(self, items):
-        items[0].clear()
-        items[1].clear()
-        items[2].setCurrentIndex(0)
-        items[3].setDateTime(QDateTime.currentDateTime())
-        items[4].setCurrentIndex(0)
-        items[5].clear()
-        items[6].clear()
-        items[7] = ""
+        items[0].clear()  # ad
+        items[1].clear()  # soyad
+        items[2].setCurrentIndex(0)  # cinsiyet
+        items[3].setDateTime(QDateTime.currentDateTime())  # tarih
+        items[4].setCurrentIndex(0)  # sefer
+        items[5].clear()  # binis
+        items[6].clear()  # inis
+        items[7] = ""  # koltuk
 
     def save(self, items):
         ad = items[0].text()
@@ -109,8 +108,11 @@ class MainController:
                                  "background-image: url(:/img/img/free-seat.png);"
                                  "background-position: center;"
                                  "background-repeat: no-repeat;")
-
-        self.im.execute("SELECT * FROM yolcular WHERE tarih = '07.12.2019'")
+        print(self.items[3].text())
+        self.im.execute(
+            "SELECT * FROM yolcular WHERE tarih = ? AND saat = ?",
+            [self.items[3].text(), self.items[4].currentText()]
+        )
 
         for s in self.im.fetchall():
             # print(s[8],s[3])
@@ -119,14 +121,17 @@ class MainController:
                 if koltuk.objectName() == s[8]:
                     if s[3] == "Erkek":
                         koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
-                                 "border: 0px;"
-                                 "background-image: url(:/img/img/male-seat.png);"
-                                 "background-position: center;"
-                                 "background-repeat: no-repeat;")
+                                             "border: 0px;"
+                                             "background-image: url(:/img/img/male-seat.png);"
+                                             "background-position: center;"
+                                             "background-repeat: no-repeat;")
                     elif s[3] == "Kadın":
                         koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
-                                 "border: 0px;"
-                                 "background-image: url(:/img/img/female-seat.png);"
-                                 "background-position: center;"
-                                 "background-repeat: no-repeat;")
+                                             "border: 0px;"
+                                             "background-image: url(:/img/img/female-seat.png);"
+                                             "background-position: center;"
+                                             "background-repeat: no-repeat;")
         print("arandı")
+
+    def tarihDegistir(self, dateEdit):
+        print(self.items[3].text())
