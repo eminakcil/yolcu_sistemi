@@ -4,7 +4,7 @@ from functools import partial
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QCoreApplication
 
-from views.design import Ui_MainWindow
+from views.yolcuEkle import Ui_MainWindow
 from controllers.slots import MainController
 
 controller = MainController()
@@ -41,8 +41,8 @@ class MyWindow(QtWidgets.QMainWindow):
             self.ui.cinsiyet_cbBox,
             self.ui.dateEdit,
             self.ui.time_cbBox,
-            self.ui.binis_TEdit,
-            self.ui.inis_TEdit,
+            self.ui.binis_txt,
+            self.ui.inis_txt,
             self.koltuk,
             self.koltuklar
         ]

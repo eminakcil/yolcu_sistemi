@@ -49,8 +49,8 @@ class MainController:
         cinsiyet = items[2].currentText()
         tarih = items[3].text()
         saat = items[4].currentText()
-        binis = items[5].toPlainText()
-        inis = items[6].toPlainText()
+        binis = items[5].text()
+        inis = items[6].text()
         koltuk = selectedSeat
         veri = (ad, soyad, cinsiyet, tarih, saat, binis, inis, koltuk)
 
@@ -96,14 +96,18 @@ class MainController:
         if not dolu:
             selectedSeat = button.objectName()  # veritabanı kayıt için
             print("secildi", selectedSeat)
-            button.setStyleSheet("background-image: url(resources/img/selected-seat.png);\n"
-                                 "background-position:center;\n"
+            button.setStyleSheet("font: 75 17pt 'Consolas';"
+                                 "border: 0px;"
+                                 "background-image: url(:/img/img/selected-seat.png);"
+                                 "background-position: center;"
                                  "background-repeat: no-repeat;")
 
     def search(self):
         for koltuk in self.items[8]:
-            koltuk.setStyleSheet("background-image: url(resources/img/free-seat.png);\n"
-                                 "background-position:center;\n"
+            koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
+                                 "border: 0px;"
+                                 "background-image: url(:/img/img/free-seat.png);"
+                                 "background-position: center;"
                                  "background-repeat: no-repeat;")
 
         self.im.execute("SELECT * FROM yolcular WHERE tarih = '07.12.2019'")
@@ -114,11 +118,15 @@ class MainController:
             for koltuk in self.items[8]:
                 if koltuk.objectName() == s[8]:
                     if s[3] == "Erkek":
-                        koltuk.setStyleSheet("background-image: url(resources/img/male-seat.png);\n"
-                                             "background-position:center;\n"
-                                             "background-repeat: no-repeat;")
+                        koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
+                                 "border: 0px;"
+                                 "background-image: url(:/img/img/male-seat.png);"
+                                 "background-position: center;"
+                                 "background-repeat: no-repeat;")
                     elif s[3] == "Kadın":
-                        koltuk.setStyleSheet("background-image: url(resources/img/female-seat.png);\n"
-                                             "background-position:center;\n"
-                                             "background-repeat: no-repeat;")
+                        koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
+                                 "border: 0px;"
+                                 "background-image: url(:/img/img/female-seat.png);"
+                                 "background-position: center;"
+                                 "background-repeat: no-repeat;")
         print("arandı")

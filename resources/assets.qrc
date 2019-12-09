@@ -1,9 +1,9 @@
 <RCC>
   <qresource prefix="img">
-    <file>female-seat.png</file>
-    <file>free-seat.png</file>
-    <file>male-seat.png</file>
-    <file>selected-seat.png</file>
-    <file>otobus.png</file>
+    <file>img/female-seat.png</file>
+    <file>img/free-seat.png</file>
+    <file>img/male-seat.png</file>
+    <file>img/otobus.png</file>
+    <file>img/selected-seat.png</file>
   </qresource>
 </RCC>
