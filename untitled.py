@@ -5,14 +5,16 @@
 # Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
+# Benim bilgisayarım
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import main
 
 class Ui_labelWindow(object):
     def close(self):
         print("çıkıyor")
-
+        main.MyWindow()
     def setupUi(self, labelWindow):
         labelWindow.setObjectName("labelWindow")
         labelWindow.resize(640, 329)

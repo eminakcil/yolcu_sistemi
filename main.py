@@ -48,6 +48,7 @@ class MyWindow(QtWidgets.QMainWindow):
             self.koltuklar
         ]
 
+
         controller.prepare(items=self.itemList)  # hazırlıklar
 
         # signals
