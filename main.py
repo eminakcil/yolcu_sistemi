@@ -62,18 +62,17 @@ class MyWindow(QtWidgets.QMainWindow):
         )
 
         self.ui.iptal_btn.clicked.connect(
-            QCoreApplication.instance().quit
+            # QCoreApplication.instance().quit
+            controller.openWindow
         )
 
         self.ui.dateEdit.dateChanged.connect(controller.search)
         self.ui.time_cbBox.currentIndexChanged.connect(controller.search)
 
-        #koltuk tiklama fonksiyon koprusu
         for btn in self.koltuklar:
             btn.clicked.connect(
                 partial(controller.selectSeat, btn)
             )
-
 
 app = QtWidgets.QApplication([])
 application = MyWindow()

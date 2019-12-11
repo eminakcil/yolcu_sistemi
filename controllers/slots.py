@@ -1,10 +1,19 @@
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime
 import sqlite3
+from untitled import Ui_labelWindow
 
 selectedSeat = ""
 
 
 class MainController:
+
+    def openWindow(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_labelWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     db = sqlite3.connect("database/vt.sqlite")
     im = db.cursor()
 
@@ -82,7 +91,10 @@ class MainController:
         dolu = False
         self.search()
 
-        self.im.execute("SELECT * FROM yolcular WHERE tarih = '07.12.2019'")
+        self.im.execute(
+            "SELECT * FROM yolcular WHERE tarih = ? AND saat = ?",
+            [self.items[3].text(), self.items[4].currentText()]
+        )
 
         for s in self.im.fetchall():
             if s[8] == button.objectName():
