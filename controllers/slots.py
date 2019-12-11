@@ -1,6 +1,6 @@
-from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime
 import sqlite3
+
 
 selectedSeat = ""
 
@@ -32,6 +32,8 @@ class MainController:
             self.items.append(item)
         print("itemler hazır")
 
+        self.items[3].setDateTime(QDateTime.currentDateTime())  # Guncel tarih
+
         self.search()
 
     def temizle(self, items):
@@ -45,6 +47,11 @@ class MainController:
         items[7] = ""  # koltuk
 
     def save(self, items):
+        global selectedSeat
+
+        if selectedSeat == "":
+            self.autoPlace()
+
         ad = items[0].text()
         soyad = items[1].text()
         cinsiyet = items[2].currentText()
@@ -53,6 +60,8 @@ class MainController:
         binis = items[5].text()
         inis = items[6].text()
         koltuk = selectedSeat
+        selectedSeat = "" #sıfırlamak için
+
         veri = (ad, soyad, cinsiyet, tarih, saat, binis, inis, koltuk)
 
         print(veri)
@@ -114,16 +123,12 @@ class MainController:
                                  "background-position: center;"
                                  "background-repeat: no-repeat;")
 
-        self.items[3].setDateTime(QDateTime.currentDateTime())
-
         self.im.execute(
             "SELECT * FROM yolcular WHERE tarih = ? AND saat = ?",
             [self.items[3].text(), self.items[4].currentText()]
         )
 
         for s in self.im.fetchall():
-            # print(s[8],s[3])
-
             for koltuk in self.items[8]:
                 if koltuk.objectName() == s[8]:
                     if s[3] == "Erkek":
@@ -139,3 +144,26 @@ class MainController:
                                              "background-position: center;"
                                              "background-repeat: no-repeat;")
         print("arandı")
+
+    def autoPlace(self):
+        global selectedSeat
+        self.im.execute(
+            "SELECT * FROM yolcular WHERE tarih = ? AND saat = ? ORDER BY koltuk",
+            [self.items[3].text(), self.items[4].currentText()]
+        )
+        self.results = []
+
+        for s in self.im.fetchall():
+            self.results.append(s[8])
+
+        print("autoplace >",self.results)
+
+        for koltuk in self.items[8]:
+            if koltuk.objectName() in self.results:
+                print(koltuk.objectName(),"dolu")
+            else:
+                print(koltuk.objectName(),"boş")
+                selectedSeat = koltuk.objectName()  # veritabanı kayıt için
+                print("autoPlace > secildi", selectedSeat)
+                break
+
