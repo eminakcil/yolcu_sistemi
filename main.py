@@ -45,6 +45,8 @@ class MyWindow(QtWidgets.QMainWindow):
 
         controller.prepare(items=self.itemList)  # hazırlıklar
 
+
+
         # signals
         self.ui.kaydet_btn.clicked.connect(
             partial(controller.save, items=self.itemList)

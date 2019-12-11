@@ -113,7 +113,9 @@ class MainController:
                                  "background-image: url(:/img/img/free-seat.png);"
                                  "background-position: center;"
                                  "background-repeat: no-repeat;")
-        print(self.items[3].text())
+
+        self.items[3].setDateTime(QDateTime.currentDateTime())
+
         self.im.execute(
             "SELECT * FROM yolcular WHERE tarih = ? AND saat = ?",
             [self.items[3].text(), self.items[4].currentText()]
@@ -137,6 +139,3 @@ class MainController:
                                              "background-position: center;"
                                              "background-repeat: no-repeat;")
         print("arandı")
-
-    def tarihDegistir(self, dateEdit):
-        print(self.items[3].text())
