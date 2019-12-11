@@ -1,18 +1,16 @@
 from PyQt5.QtCore import QDateTime
 import sqlite3
 
-
-selectedSeat = ""
+selectedSeat = ""  # secili koltuk degiskeni etki alanından dolayı burda tanımlandı.
 
 
 class MainController:
+    db = sqlite3.connect("database/vt.sqlite")  # veritabani baglantisi
+    im = db.cursor()  # veritabani imleci
 
-    db = sqlite3.connect("database/vt.sqlite")
-    im = db.cursor()
+    items = []  # tasarimdan cekilen itemler  (label,button vs)
 
-    items = []
-
-    def prepare(self, items):
+    def prepare(self, items):  # hazirlik
         self.im.execute("""
             CREATE TABLE IF NOT EXISTS yolcular
             (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -24,11 +22,11 @@ class MainController:
             "binis" TEXT,
             "inis" TEXT,
             "koltuk" TEXT
-            )""")
-        self.db.commit()
+            )""")  # veritabni tabloları kontrol ettik.
+        self.db.commit()  # veritabanina isle
         print("veritabanı hazır")
 
-        for item in items:
+        for item in items:  # itemleri cektik !!Gelistirilecek
             self.items.append(item)
         print("itemler hazır")
 
@@ -36,7 +34,7 @@ class MainController:
 
         self.search()
 
-    def temizle(self, items):
+    def clear(self, items):  # itemleri temizle
         items[0].clear()  # ad
         items[1].clear()  # soyad
         items[2].setCurrentIndex(0)  # cinsiyet
@@ -47,10 +45,10 @@ class MainController:
         items[7] = ""  # koltuk
 
     def save(self, items):
-        global selectedSeat
+        global selectedSeat  # degiskenin degisimden etkilenmesi
 
-        if selectedSeat == "":
-            self.autoPlace()
+        if selectedSeat == "":  # eger koltuk secilmediyse
+            self.autoPlace() # otomatik yerlestir
 
         ad = items[0].text()
         soyad = items[1].text()
@@ -60,7 +58,8 @@ class MainController:
         binis = items[5].text()
         inis = items[6].text()
         koltuk = selectedSeat
-        selectedSeat = "" #sıfırlamak için
+
+        selectedSeat = ""  # kaydettikten sonra bosa dusmesi icin
 
         veri = (ad, soyad, cinsiyet, tarih, saat, binis, inis, koltuk)
 
@@ -68,9 +67,9 @@ class MainController:
         self.im.execute(
             """INSERT INTO yolcular
                 (ad,soyad,cinsiyet,tarih,saat,binis,inis,koltuk)
-                VALUES(?,?,?,?,?,?,?,?)""", veri)
+                VALUES(?,?,?,?,?,?,?,?)""", veri)  # verileri veritabanina gonderdik
 
-        self.db.commit()
+        self.db.commit()  # veritabanina isle
 
         print(
             'ad > ' + ad
@@ -84,8 +83,8 @@ class MainController:
             , sep="\n"
         )
 
-        self.temizle(items)
-        self.search()
+        self.clear(items)  # itemlerin degerini sifirla
+        self.search()  #
 
     def selectSeat(self, button):
         global selectedSeat
@@ -156,14 +155,13 @@ class MainController:
         for s in self.im.fetchall():
             self.results.append(s[8])
 
-        print("autoplace >",self.results)
+        print("autoplace >", self.results)
 
         for koltuk in self.items[8]:
             if koltuk.objectName() in self.results:
-                print(koltuk.objectName(),"dolu")
+                print(koltuk.objectName(), "dolu")
             else:
-                print(koltuk.objectName(),"boş")
+                print(koltuk.objectName(), "boş")
                 selectedSeat = koltuk.objectName()  # veritabanı kayıt için
                 print("autoPlace > secildi", selectedSeat)
                 break
-

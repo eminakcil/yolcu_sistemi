@@ -52,7 +52,7 @@ class MyWindow(QtWidgets.QMainWindow):
             partial(controller.save, items=self.itemList)
         )
         self.ui.temizle_btn.clicked.connect(
-            partial(controller.temizle, items=self.itemList)
+            partial(controller.clear, items=self.itemList)
         )
         self.ui.temizle_btn.clicked.connect(
             partial(controller.search)
