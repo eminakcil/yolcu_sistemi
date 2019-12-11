@@ -2,21 +2,16 @@ import sys
 from functools import partial
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QCoreApplication, pyqtSlot
+from PyQt5.QtCore import QCoreApplication
 
 from views.yolcuEkle import Ui_MainWindow
 from controllers.slots import MainController
 
-controller = MainController()
-
 
 class MyWindow(QtWidgets.QMainWindow):
 
-    def __init__(self):
-        super(MyWindow, self).__init__()
-
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+    def upStart(self):
+        controller = MainController()
 
         # temel degiskenler
         self.koltuklar = [
@@ -48,7 +43,6 @@ class MyWindow(QtWidgets.QMainWindow):
             self.koltuklar
         ]
 
-
         controller.prepare(items=self.itemList)  # hazırlıklar
 
         # signals
@@ -63,8 +57,7 @@ class MyWindow(QtWidgets.QMainWindow):
         )
 
         self.ui.iptal_btn.clicked.connect(
-            # QCoreApplication.instance().quit
-            controller.openWindow
+            QCoreApplication.instance().quit
         )
 
         self.ui.dateEdit.dateChanged.connect(controller.search)
@@ -75,7 +68,17 @@ class MyWindow(QtWidgets.QMainWindow):
                 partial(controller.selectSeat, btn)
             )
 
-app = QtWidgets.QApplication([])
-application = MyWindow()
-application.show()
-sys.exit(app.exec())
+    def __init__(self):
+        if __name__ == "__main__":
+            super(MyWindow, self).__init__()
+
+            self.ui = Ui_MainWindow()
+            self.ui.setupUi(self)
+
+            self.upStart()
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    application = MyWindow()
+    application.show()
+    sys.exit(app.exec())

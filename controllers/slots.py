@@ -1,18 +1,11 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QDateTime
 import sqlite3
-from untitled import Ui_labelWindow
 
 selectedSeat = ""
 
 
 class MainController:
-
-    def openWindow(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_labelWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
 
     db = sqlite3.connect("database/vt.sqlite")
     im = db.cursor()
