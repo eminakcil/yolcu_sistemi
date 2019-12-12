@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="img">
+    <file>img/steering-whell.png</file>
     <file>img/female-seat.png</file>
     <file>img/free-seat.png</file>
     <file>img/male-seat.png</file>

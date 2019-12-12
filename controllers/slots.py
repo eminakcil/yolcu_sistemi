@@ -1,4 +1,7 @@
-from PyQt5.QtCore import QDateTime
+from datetime import datetime
+from typing import Union
+
+from PyQt5.QtCore import QDateTime, QDate
 import sqlite3
 
 selectedSeat = ""  # secili koltuk degiskeni etki alanından dolayı burda tanımlandı.
@@ -30,7 +33,9 @@ class MainController:
             self.items.append(item)
         print("itemler hazır")
 
-        self.items[3].setDateTime(QDateTime.currentDateTime())  # Guncel tarih
+        self.items[3].setSelectedDate(
+            QDate(datetime.now().year, datetime.now().month, 1)
+        )  # Guncel tarih
 
         self.search()
 
@@ -38,30 +43,25 @@ class MainController:
         items[0].clear()  # ad
         items[1].clear()  # soyad
         items[2].setCurrentIndex(0)  # cinsiyet
-        items[3].setDateTime(QDateTime.currentDateTime())  # tarih
-        items[4].setCurrentIndex(0)  # sefer
-        items[5].clear()  # binis
-        items[6].clear()  # inis
-        items[7] = ""  # koltuk
+        # items[3].setDateTime(QDateTime.currentDateTime())  # tarih
+        items[4].setCurrentIndex(0)  # saat
+        items[5].setCurrentIndex(0)  # durak
+        items[6] = ""  # koltuk
 
     def save(self, items):
         global selectedSeat  # degiskenin degisimden etkilenmesi
 
-        if selectedSeat == "":  # eger koltuk secilmediyse
-            self.autoPlace() # otomatik yerlestir
-
         ad = items[0].text()
         soyad = items[1].text()
         cinsiyet = items[2].currentText()
-        tarih = items[3].text()
+        tarih = items[3].selectedDate().toString()
         saat = items[4].currentText()
-        binis = items[5].text()
-        inis = items[6].text()
+        durak = items[5].currentText()
         koltuk = selectedSeat
 
         selectedSeat = ""  # kaydettikten sonra bosa dusmesi icin
 
-        veri = (ad, soyad, cinsiyet, tarih, saat, binis, inis, koltuk)
+        veri = (ad, soyad, cinsiyet, tarih, saat, "", durak, koltuk)
 
         print(veri)
         self.im.execute(
@@ -77,8 +77,8 @@ class MainController:
             , "cinsiyet >" + cinsiyet
             , "tarih > " + tarih
             , "saat > " + saat
-            , "binis > " + binis
-            , "inis > " + inis
+            , "durak > " + durak
+            , "inis > " + ""
             , "koltuk > " + koltuk
             , sep="\n"
         )
@@ -94,7 +94,7 @@ class MainController:
 
         self.im.execute(
             "SELECT * FROM yolcular WHERE tarih = ? AND saat = ?",
-            [self.items[3].text(), self.items[4].currentText()]
+            [self.items[3].selectedDate().toString(), self.items[4].currentText()]
         )
 
         for s in self.im.fetchall():
@@ -115,7 +115,7 @@ class MainController:
                                  "background-repeat: no-repeat;")
 
     def search(self):
-        for koltuk in self.items[8]:
+        for koltuk in self.items[7]:
             koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
                                  "border: 0px;"
                                  "background-image: url(:/img/img/free-seat.png);"
@@ -124,11 +124,11 @@ class MainController:
 
         self.im.execute(
             "SELECT * FROM yolcular WHERE tarih = ? AND saat = ?",
-            [self.items[3].text(), self.items[4].currentText()]
+            [self.items[3].selectedDate().toString(), self.items[4].currentText()]
         )
 
         for s in self.im.fetchall():
-            for koltuk in self.items[8]:
+            for koltuk in self.items[7]:
                 if koltuk.objectName() == s[8]:
                     if s[3] == "Erkek":
                         koltuk.setStyleSheet("font: 75 17pt 'Consolas';"
@@ -148,7 +148,7 @@ class MainController:
         global selectedSeat
         self.im.execute(
             "SELECT * FROM yolcular WHERE tarih = ? AND saat = ? ORDER BY koltuk",
-            [self.items[3].text(), self.items[4].currentText()]
+            [self.items[3].selectedDate().toString(), self.items[4].currentText()]
         )
         self.results = []
 
@@ -157,7 +157,7 @@ class MainController:
 
         print("autoplace >", self.results)
 
-        for koltuk in self.items[8]:
+        for koltuk in self.items[7]:
             if koltuk.objectName() in self.results:
                 print(koltuk.objectName(), "dolu")
             else:

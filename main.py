@@ -21,13 +21,7 @@ class MyWindow(QtWidgets.QMainWindow):
             self.ui.koltuk_10_btn, self.ui.koltuk_11_btn, self.ui.koltuk_12_btn,
             self.ui.koltuk_13_btn, self.ui.koltuk_14_btn, self.ui.koltuk_15_btn,
             self.ui.koltuk_16_btn, self.ui.koltuk_17_btn, self.ui.koltuk_18_btn,
-            self.ui.koltuk_19_btn, self.ui.koltuk_20_btn, self.ui.koltuk_21_btn,
-            self.ui.koltuk_22_btn, self.ui.koltuk_23_btn, self.ui.koltuk_24_btn,
-            self.ui.koltuk_25_btn, self.ui.koltuk_26_btn, self.ui.koltuk_27_btn,
-            self.ui.koltuk_28_btn, self.ui.koltuk_29_btn, self.ui.koltuk_30_btn,
-            self.ui.koltuk_31_btn, self.ui.koltuk_32_btn, self.ui.koltuk_33_btn,
-            self.ui.koltuk_34_btn, self.ui.koltuk_35_btn, self.ui.koltuk_36_btn,
-            self.ui.koltuk_37_btn
+            self.ui.koltuk_19_btn, self.ui.koltuk_20_btn
         ]
 
         self.koltuk = ""
@@ -37,32 +31,18 @@ class MyWindow(QtWidgets.QMainWindow):
             self.ui.cinsiyet_cbBox,
             self.ui.dateEdit,
             self.ui.time_cbBox,
-            self.ui.binis_txt,
-            self.ui.inis_txt,
+            self.ui.durak_cbBox,
             self.koltuk,
             self.koltuklar
         ]
 
         controller.prepare(items=self.itemList)  # hazırlıklar
 
-
-
         # signals
         self.ui.kaydet_btn.clicked.connect(
             partial(controller.save, items=self.itemList)
         )
-        self.ui.temizle_btn.clicked.connect(
-            partial(controller.clear, items=self.itemList)
-        )
-        self.ui.temizle_btn.clicked.connect(
-            partial(controller.search)
-        )
-
-        self.ui.iptal_btn.clicked.connect(
-            QCoreApplication.instance().quit
-        )
-
-        self.ui.dateEdit.dateChanged.connect(controller.search)
+        self.ui.dateEdit.clicked.connect(controller.search)
         self.ui.time_cbBox.currentIndexChanged.connect(controller.search)
 
         for btn in self.koltuklar:
@@ -78,6 +58,7 @@ class MyWindow(QtWidgets.QMainWindow):
             self.ui.setupUi(self)
 
             self.upStart()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
