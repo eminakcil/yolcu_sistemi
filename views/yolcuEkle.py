@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainscreen.ui'
+# Form implementation generated from reading ui file 'yolcuEkle.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -229,6 +229,34 @@ class Ui_MainWindow(object):
         self.steering_whell.setStyleSheet("font: 75 17pt \"Consolas\";border: 0px;background-image: url(:/img/img/steering-whell.png);background-position: center;background-repeat: no-repeat;")
         self.steering_whell.setText("")
         self.steering_whell.setObjectName("steering_whell")
+        self.ad_shower_lbl = QtWidgets.QLabel(self.centralwidget)
+        self.ad_shower_lbl.setGeometry(QtCore.QRect(650, 31, 18, 16))
+        self.ad_shower_lbl.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.ad_shower_lbl.setObjectName("ad_shower_lbl")
+        self.soyad_shower_lbl = QtWidgets.QLabel(self.centralwidget)
+        self.soyad_shower_lbl.setGeometry(QtCore.QRect(650, 81, 38, 16))
+        self.soyad_shower_lbl.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.soyad_shower_lbl.setObjectName("soyad_shower_lbl")
+        self.telNo_shower_lbl = QtWidgets.QLabel(self.centralwidget)
+        self.telNo_shower_lbl.setGeometry(QtCore.QRect(650, 131, 67, 16))
+        self.telNo_shower_lbl.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.telNo_shower_lbl.setObjectName("telNo_shower_lbl")
+        self.not_shower_tEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.not_shower_tEdit.setGeometry(QtCore.QRect(650, 203, 256, 192))
+        self.not_shower_tEdit.setObjectName("not_shower_tEdit")
+        self.ad_shower_txt = QtWidgets.QLineEdit(self.centralwidget)
+        self.ad_shower_txt.setGeometry(QtCore.QRect(650, 53, 133, 22))
+        self.ad_shower_txt.setObjectName("ad_shower_txt")
+        self.soyad_shower_txt = QtWidgets.QLineEdit(self.centralwidget)
+        self.soyad_shower_txt.setGeometry(QtCore.QRect(650, 103, 133, 22))
+        self.soyad_shower_txt.setObjectName("soyad_shower_txt")
+        self.telNo_shower_txt = QtWidgets.QLineEdit(self.centralwidget)
+        self.telNo_shower_txt.setGeometry(QtCore.QRect(650, 153, 133, 22))
+        self.telNo_shower_txt.setObjectName("telNo_shower_txt")
+        self.not_shower_lbl = QtWidgets.QLabel(self.centralwidget)
+        self.not_shower_lbl.setGeometry(QtCore.QRect(650, 181, 19, 16))
+        self.not_shower_lbl.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.not_shower_lbl.setObjectName("not_shower_lbl")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1200, 21))
@@ -295,4 +323,8 @@ class Ui_MainWindow(object):
         self.koltuk_13_btn.setText(_translate("MainWindow", "13"))
         self.koltuk_2_btn.setText(_translate("MainWindow", "2"))
         self.koltuk_1_btn.setText(_translate("MainWindow", "1"))
+        self.ad_shower_lbl.setText(_translate("MainWindow", "Adı"))
+        self.soyad_shower_lbl.setText(_translate("MainWindow", "Soyadı"))
+        self.telNo_shower_lbl.setText(_translate("MainWindow", "Telefon No:"))
+        self.not_shower_lbl.setText(_translate("MainWindow", "Not"))
 import resources.assets

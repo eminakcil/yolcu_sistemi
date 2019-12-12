@@ -301,7 +301,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="koltuk_2_btn_2">
+   <widget class="QPushButton" name="koltuk_3_btn">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -650,6 +650,110 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="ad_shower_lbl">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>31</y>
+      <width>18</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Adı</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="soyad_shower_lbl">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>81</y>
+      <width>38</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Soyadı</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="telNo_shower_lbl">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>131</y>
+      <width>67</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Telefon No:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="not_shower_tEdit">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>203</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ad_shower_txt">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>53</y>
+      <width>133</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="soyad_shower_txt">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>103</y>
+      <width>133</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="telNo_shower_txt">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>153</y>
+      <width>133</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="not_shower_lbl">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>181</y>
+      <width>19</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Not</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -664,7 +768,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../Projeler/yolcu_sistemi/resources/assets.qrc"/>
+  <include location="../resources/assets.qrc"/>
  </resources>
  <connections/>
 </ui>
