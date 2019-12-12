@@ -11,6 +11,18 @@ from controllers.slots import MainController
 class MyWindow(QtWidgets.QMainWindow):
 
     def upStart(self):
+
+        self.shower=[
+            self.ui.ad_shower_lbl,
+            self.ui.ad_shower_txt,
+            self.ui.soyad_shower_lbl,
+            self.ui.soyad_shower_txt,
+            self.ui.telNo_shower_lbl,
+            self.ui.telNo_shower_txt,
+            self.ui.not_shower_lbl,
+            self.ui.not_shower_tEdit
+        ]
+
         controller = MainController()
 
         # temel degiskenler
@@ -31,13 +43,14 @@ class MyWindow(QtWidgets.QMainWindow):
             self.ui.cinsiyet_cbBox,
             self.ui.dateEdit,
             self.ui.time_cbBox,
+            self.ui.telNo_txt,
             self.ui.durak_cbBox,
             self.koltuk,
-            self.koltuklar
+            self.koltuklar,
+            self.shower
         ]
 
         controller.prepare(items=self.itemList)  # hazırlıklar
-
         # signals
         self.ui.kaydet_btn.clicked.connect(
             partial(controller.save, items=self.itemList)
